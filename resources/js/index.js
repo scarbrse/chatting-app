@@ -2,21 +2,29 @@ const nameInput = document.getElementById("my-name-input");
 const myMessage = document.getElementById("my-message");
 const sendButton = document.getElementById("send-button");
 const chatBox = document.getElementById("chat");
-const serverURL = 'https://it3049c-chat-application.herokuapp.com/messages';
+const serverURL = "https://it3049c-chat-application.herokuapp.com/messages";
 const MILLISECONDS_IN_TEN_SECONDS = 10000;
+setInterval(updateMessages, MILLISECONDS_IN_TEN_SECONDS);
 
-function updateMessagesInChatBox() {
-  this.fetchMessages();
-  this.formatMessages();
-  this.updateChatBox();
+async function updateMessagesInChatBox() {
 
-};
+  const messages = await fetchMessages;
+  console.log(messages);
+
+  let formattedMessages = "";
+  messages.forEach(message => {
+    formattedMessages += formatMessage(message, nameInput.value);
+  });
+  chatBox.innerHTML = formattedMessages;
+}
+
+updateMessagesInChatBox();
 
 
 function fetchMessages() {
   return fetch(serverURL)
   .then(response => response.json())
-};
+}
 
 function formatMessage(message, nameInput) {
   const time = new Date(message.timestamp);
@@ -26,7 +34,7 @@ function formatMessage(message, nameInput) {
       return `
       <div class="mine messages">
           <div class="message">
-              ${message.text}
+              ${message.value}
           </div>
           <div class="sender-info">
               ${formattedTime}
@@ -37,7 +45,7 @@ function formatMessage(message, nameInput) {
       return `
           <div class="yours messages">
               <div class="message">
-                  ${message.text}
+                  ${message.value}
               </div>
               <div class="sender-info">
                   ${message.sender} ${formattedTime}
@@ -45,24 +53,7 @@ function formatMessage(message, nameInput) {
           </div>
       `
   };
-};
-
-function updateChatBox (){
-  this.updateMessages();
-  chatBox.textContent = "";
-
-};
-
-async function updateMessages() {
-  const messages = await fetchMessages();
-  console.log(messages);
-  let formatMessages = "";
-  messages.forEach(message => {
-    formatMessages += formatMessage(message, nameInput.value);
-  });
-  chatBox.innerHTML = formatMessages;
-
-};
+}
 
 function sendMessages(username, text) {
   const newMessage = {
@@ -78,18 +69,27 @@ function sendMessages(username, text) {
       },
       body: JSON.stringify(newMessage)
   });
-};
+}
 
 sendButton.addEventListener("click", function(sendButtonClickEvent) {
   sendButtonClickEvent.preventDefault();
   const sender = nameInput.value;
   const message = myMessage.value;
 
-  sendMessages(sender,message);
+  sendMessages(sender, message);
   myMessage.value = "";
 });
 
 
 
-updateMessages();
-setInterval(updateMessages, MILLISECONDS_IN_TEN_SECONDS);
+
+
+
+
+
+
+
+
+
+
+
