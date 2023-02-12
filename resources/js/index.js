@@ -18,11 +18,11 @@ function fetchMessages() {
   .then(response => response.json())
 };
 
-function formatMessage(message, myNameInput) {
+function formatMessage(message, nameInput) {
   const time = new Date(message.timestamp);
   const formattedTime = `${time.getHours()}:${time.getMinutes()}`;
 
-  if (myNameInput === message.sender) {
+  if (nameInput === message.sender) {
       return `
       <div class="mine messages">
           <div class="message">
