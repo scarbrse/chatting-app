@@ -59,5 +59,24 @@ async function updateMessages() {
 
 };
 
+function sendMessages(username, text) {
+  const newMessage = {
+      sender: username,
+      text: text,
+      timestamp: new Date()
+  }
+
+  fetch (serverURL, {
+      method: `POST`, 
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newMessage)
+  });
+}
+
+
+
+
 updateMessages()
 setInterval(updateMessages, MILLISECONDS_IN_TEN_SECONDS);
