@@ -17,7 +17,7 @@ how many points out of 20 do you deserve on this assignment: 20/20
 ## Self-Reflection:
 <!-- Write your self-reflection under this line -->
 
-I think that attention to detail definetly makes or breaks a program. I have a tendancy to leave out little details that end up affecting my code tremendously, so I think I just need to pay more attention. 
+I think that attention to detail definitely makes or breaks a program. I have a tendancy to leave out little details that end up affecting my code tremendously, so I think I just need to pay more attention. 
 
 However, I also found that there were several inconsistencies between the instruction code and the code provided (for example, in the instructions it says to create an updateMessagesInChatBox() function, but throughout the instructions only a updateMessages() function was referenced, which I think created a lot of confusion for me and obviously caused the program to not run correctly in the beginning). I noticed this in some of the previous labs as well, so maybe this is something for the instructor to consider fixing throughout the remainder of the course.
 
