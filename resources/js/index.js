@@ -78,7 +78,7 @@ function sendMessages(username, text) {
       },
       body: JSON.stringify(newMessage)
   });
-}
+};
 
 sendButton.addEventListener("click", function(sendButtonClickEvent) {
   sendButtonClickEvent.preventDefault();
@@ -91,5 +91,5 @@ sendButton.addEventListener("click", function(sendButtonClickEvent) {
 
 
 
-updateMessages()
+updateMessages();
 setInterval(updateMessages, MILLISECONDS_IN_TEN_SECONDS);
