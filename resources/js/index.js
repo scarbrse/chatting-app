@@ -2,11 +2,11 @@ const nameInput = document.getElementById("my-name-input");
 const myMessage = document.getElementById("my-message");
 const sendButton = document.getElementById("send-button");
 const chatBox = document.getElementById("chat");
-const serverURL = `http://localhost:8080`;
+const serverURL = `https://it3049c-chat-application.herokuapp.com/messages`;
 const MILLISECONDS_IN_TEN_SECONDS = 10000;
 
 
-async function updateMessagesInChatBox() {
+async function updateMessagesInChatBox(callback) {
 
   const messages = await fetchMessages();
   console.log(messages);
@@ -14,19 +14,16 @@ async function updateMessagesInChatBox() {
   let formattedMessages = "";
   messages.forEach(message => {
     formattedMessages += formatMessage(message, nameInput.value);
+    chatBox.innerHTML = formattedMessages;
   });
-  console.log(formattedMessages);
-  chatBox.innerHTML = formattedMessages;
-  console.log(chatBox.innerHTML);
 }
 
 updateMessagesInChatBox();
 setInterval(updateMessagesInChatBox, MILLISECONDS_IN_TEN_SECONDS);
 
-async function fetchMessages() {
-  const response = await fetch('/messages');
-  const messages = await response.json();
-  return messages;
+function fetchMessages() {
+  return fetch(serverURL)
+      .then( response => response.json())
 }
 
 function formatMessage(message, nameInput) {
@@ -61,7 +58,7 @@ function formatMessage(message, nameInput) {
 function sendMessages(username, text) {
   const newMessage = {
       sender: username,
-      text: text,
+      value: text,
       timestamp: new Date()
   }
 
@@ -80,6 +77,14 @@ sendButton.addEventListener("click", function() {
 
   sendMessages(sender,message);
   myMessage.value = "";
+
+   // render the new message in the chat box
+   chatBox.innerHTML += formatMessage({
+    sender: sender,
+    value: message,
+    timestamp: new Date()
+  }, nameInput.value); 
+  
 });
 
 
