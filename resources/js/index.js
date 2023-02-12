@@ -5,19 +5,18 @@ const chatBox = document.getElementById("chat");
 const serverURL = 'https://it3049c-chat-application.herokuapp.com/messages';
 const MILLISECONDS_IN_TEN_SECONDS = 10000;
 
-function updateMessages() {
+function updateMessagesInChatBox() {
   this.fetchMessages();
   this.formatMessages();
   this.updateChatBox();
 
 };
 
+
 function fetchMessages() {
   return fetch(serverURL)
   .then(response => response.json())
 };
-
-
 
 function formatMessage(message, myNameInput) {
   const time = new Date(message.timestamp);
@@ -46,6 +45,12 @@ function formatMessage(message, myNameInput) {
           </div>
       `
   };
+};
+
+function updateChatBox (){
+  this.updateMessages();
+  chatBox.textContent = "";
+
 };
 
 async function updateMessages() {
