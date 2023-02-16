@@ -109,5 +109,19 @@ else {
   JOptionPane.showMessageDialog(null, "You must save your name.");
 }
 
-
-
+function updateName(myName) {
+  if (updateButton)
+    updateButton.addEventListener("click",function(updateButtonClickEvent) {
+    updateButtonClickEvent.preventDefault();
+    localStorage.setItem("name",myName);
+  
+  });
+  
+  }
+  function SaveName(myName) {
+  if (saveButton)
+  saveButton.addEventListener("click",function(saveButtonClickEvent) {
+    saveButtonClickEvent.preventDefault();
+    localStorage.setItem("name",myName);
+  });
+  }
