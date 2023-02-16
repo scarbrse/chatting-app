@@ -7,10 +7,33 @@ const MILLISECONDS_IN_TEN_SECONDS = 10000;
 
 
 
-myName = localStorage.setItem("name", JSON.stringify(nameInput));
-saveName = localStorage.setItem("name", JSON.stringify(nameInput));
-const updateButton = document.getElementById("update-button");
-const saveButton = document.getElementById("save-button");
+// myName = localStorage.setItem("name", JSON.stringify(nameInput));
+// saveName = localStorage.setItem("name", JSON.stringify(nameInput));
+
+// const saveButton = document.getElementById("save-button");
+
+if (!localStorage.getItem('username')){
+  chatBox.classList.add('d-none');
+  myMessage.classList.add('d-none');
+  sendButton.classList.add('d-none');   
+} else {
+  nameInput.placeholder = JSON.parse(localStorage.getItem('username'))
+  chatBox.classList.remove('d-none');
+  myMessage.classList.remove('d-none');
+  sendButton.classList.remove('d-none');
+}
+
+
+nameSave.addEventListener("click", function(e){
+  e.preventDefault();
+  const username = nameInput.value;
+  localStorage.setItem('username', JSON.stringify(username));
+  chatBox.classList.remove('d-none');
+  myMessage.classList.remove('d-none');
+  sendButton.classList.remove('d-none');
+});
+
+
 
 async function updateMessagesInChatBox(callback) {
 
@@ -92,36 +115,3 @@ sendButton.addEventListener("click", function() {
   }, nameInput.value); 
   
 });
-
-if (localStorage.getItem('name') !=null) {
-  if (sendButton) {
-    sendButton.addEventListener("click", function(sendButtonClickEvent) {
-      sendButtonClickEvent.preventDefault();
-      const sender = nameInput.value;
-      const message = myMessage.value;
-
-      sendMessages(sender,message);
-      myMessage.value = "";
-    });
-  }
-}
-else {
-  JOptionPane.showMessageDialog(null, "You must save your name.");
-}
-
-function updateName(myName) {
-  if (updateButton)
-    updateButton.addEventListener("click",function(updateButtonClickEvent) {
-    updateButtonClickEvent.preventDefault();
-    localStorage.setItem("name",myName);
-  
-  });
-  
-  }
-  function SaveName(myName) {
-  if (saveButton)
-  saveButton.addEventListener("click",function(saveButtonClickEvent) {
-    saveButtonClickEvent.preventDefault();
-    localStorage.setItem("name",myName);
-  });
-  }
