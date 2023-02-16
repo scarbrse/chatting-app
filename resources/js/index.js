@@ -4,32 +4,27 @@ const sendButton = document.getElementById("send-button");
 const chatBox = document.getElementById("chat");
 const serverURL = `https://it3049c-chat.fly.dev/messages`;
 const MILLISECONDS_IN_TEN_SECONDS = 10000;
-const nameSave = document.getElementById("save-name");
+nameSave = document.getElementById("save-name");
 
 
 
-
-if (!localStorage.getItem('username')){
-  chatBox.classList.add('d-none');
-  myMessage.classList.add('d-none');
-  sendButton.classList.add('d-none');   
-} else {
-  nameInput.placeholder = JSON.parse(localStorage.getItem('username'))
-  chatBox.classList.add('d-block');
-  myMessage.classList.add('d-block');
-  sendButton.classList.add('d-block');
-}
+do {
+chatBox.classList.add('d-none');
+myMessage.classList.add('d-none');
+sendButton.classList.add('d-none');
+} while (!localStorage.getItem('username'));
 
 
-nameSave.addEventListener("click", function(e){
-  e.preventDefault();
-  const username = nameInput.value;
+
+nameSave.addEventListener("click", function(){
+  const username = nameInput.value.trim();
+  if (username !== "") {
   localStorage.setItem('username', JSON.stringify(username));
-  chatBox.classList.remove('d-none');
-  myMessage.classList.remove('d-none');
-  sendButton.classList.remove('d-none');
+ chatBox.classList.remove('d-none');
+ myMessage.classList.remove('d-none');
+ sendButton.classList.remove('d-none');
+  }
 });
-
 
 
 async function updateMessagesInChatBox(callback) {
