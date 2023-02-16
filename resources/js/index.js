@@ -93,4 +93,21 @@ sendButton.addEventListener("click", function() {
   
 });
 
+if (localStorage.getItem('name') !=null) {
+  if (sendButton) {
+    sendButton.addEventListener("click", function(sendButtonClickEvent) {
+      sendButtonClickEvent.preventDefault();
+      const sender = nameInput.value;
+      const message = myMessage.value;
+
+      sendMessages(sender,message);
+      myMessage.value = "";
+    });
+  }
+}
+else {
+  JOptionPane.showMessageDialog(null, "You must save your name.");
+}
+
+
 
