@@ -6,6 +6,12 @@ const serverURL = `https://it3049c-chat.fly.dev/messages`;
 const MILLISECONDS_IN_TEN_SECONDS = 10000;
 
 
+
+myName = localStorage.setItem("name", JSON.stringify(nameInput));
+saveName = localStorage.setItem("name", JSON.stringify(nameInput));
+const updateButton = document.getElementById("update-button");
+const saveButton = document.getElementById("save-button");
+
 async function updateMessagesInChatBox(callback) {
 
   const messages = await fetchMessages();
