@@ -51,6 +51,7 @@ function fetchMessages() {
 
 
 function formatMessage(message, username) {
+  console.log(message);
   const time = new Date(message.timestamp);
   const formattedTime = `${time.getHours()}:${time.getMinutes()}`;
 
@@ -78,6 +79,7 @@ function formatMessage(message, username) {
       `
   };
 }
+
 
 
 function sendMessages(username, text) {
