@@ -33,10 +33,11 @@ async function updateMessagesInChatBox(callback) {
   console.log(messages);
 
   let formattedMessages = "";
+  const username = JSON.parse(localStorage.getItem("username"));
   messages.forEach(message => {
-    formattedMessages += formatMessage(message, nameInput.value);
-    chatBox.innerHTML = formattedMessages;
+    formattedMessages += formatMessage(message, username);
   });
+  chatBox.innerHTML = formattedMessages;
 }
 
 updateMessagesInChatBox();
