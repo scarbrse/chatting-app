@@ -70,7 +70,7 @@ function formatMessage(message, username) {
       return `
           <div class="yours messages">
               <div class="message">
-                  ${message.value}
+                  ${message.text}
               </div>
               <div class="sender-info">
                   ${message.sender} ${formattedTime}
