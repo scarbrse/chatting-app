@@ -40,6 +40,7 @@ async function updateMessagesInChatBox(callback) {
   chatBox.innerHTML = formattedMessages;
 }
 
+
 updateMessagesInChatBox();
 setInterval(updateMessagesInChatBox, MILLISECONDS_IN_TEN_SECONDS);
 
@@ -48,11 +49,12 @@ function fetchMessages() {
       .then( response => response.json())
 }
 
-function formatMessage(message, nameInput) {
+
+function formatMessage(message, username) {
   const time = new Date(message.timestamp);
   const formattedTime = `${time.getHours()}:${time.getMinutes()}`;
 
-  if (nameInput === message.sender) {
+  if (username === message.sender) {
       return `
       <div class="mine messages">
           <div class="message">
@@ -76,6 +78,7 @@ function formatMessage(message, nameInput) {
       `
   };
 }
+
 
 function sendMessages(username, text) {
   const newMessage = {
